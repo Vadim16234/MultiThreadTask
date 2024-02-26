@@ -8,7 +8,7 @@ public class FirstThread implements Runnable{
 
     FirstThread(Semaphore s, Foo f) {
         sem = s;
-        foo = f;
+        this.foo = f;
         new Thread(this).start();
     }
 
@@ -16,6 +16,7 @@ public class FirstThread implements Runnable{
         try {
             sem.acquire();
             foo.first();
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             System.out.println(e);
         }

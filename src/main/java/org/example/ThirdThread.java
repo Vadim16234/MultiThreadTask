@@ -8,7 +8,7 @@ public class ThirdThread implements Runnable {
 
     ThirdThread(Semaphore s, Foo f) {
         sem = s;
-        foo = f;
+        this.foo = f;
         new Thread(this).start();
     }
 
@@ -16,6 +16,7 @@ public class ThirdThread implements Runnable {
         try {
             sem.acquire();
             foo.third();
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             System.out.println(e);
         }
