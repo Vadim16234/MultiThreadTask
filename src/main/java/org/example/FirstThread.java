@@ -3,8 +3,8 @@ package org.example;
 import java.util.concurrent.Semaphore;
 
 public class FirstThread implements Runnable{
-    Foo foo;
-    Semaphore sem;
+    private final Foo foo;
+    private final Semaphore sem;
 
     FirstThread(Semaphore s, Foo f) {
         sem = s;
