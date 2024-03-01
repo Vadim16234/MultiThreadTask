@@ -2,18 +2,18 @@ package org.example;
 
 import java.util.concurrent.CountDownLatch;
 
-public class Foo {
+public class Foo implements Runnable {
     private final CountDownLatch cd1 = new CountDownLatch(1);
     private final CountDownLatch cd2 = new CountDownLatch(1);
 
     public void first() {
-        new MyThread(cd1);
+        new Thread();
         System.out.print("first");
         cd1.countDown();
     }
 
     public void second() {
-        new MyThread(cd1);
+        new Thread();
 
         try {
             cd1.await();
@@ -25,7 +25,7 @@ public class Foo {
     }
 
     public void third() {
-        new MyThread(cd2);
+        new Thread();
 
         try {
             cd2.await();
@@ -34,5 +34,9 @@ public class Foo {
         } catch (InterruptedException e) {
             System.out.println("Поток прерван" + e);
         }
+    }
+
+    @Override
+    public void run() {
     }
 }
