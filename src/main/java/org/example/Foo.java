@@ -2,7 +2,7 @@ package org.example;
 
 import java.util.concurrent.CountDownLatch;
 
-public class Foo implements Runnable {
+public class Foo implements Runnable{
     private final CountDownLatch cd1 = new CountDownLatch(1);
     private final CountDownLatch cd2 = new CountDownLatch(1);
 
