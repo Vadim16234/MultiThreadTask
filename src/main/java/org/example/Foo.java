@@ -7,46 +7,19 @@ public class Foo {
     private final CountDownLatch cd2 = new CountDownLatch(1);
 
     public void first() {
-        Thread threadA = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                System.out.print("first");
-            }
-        });
-
-        threadA.start();
+        System.out.print("first");
         cd1.countDown();
     }
 
-    public void second() {
-        Thread threadB = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    cd1.await();
-                    System.out.print("second");
-                    cd2.countDown();
-                } catch (InterruptedException e) {
-                    System.out.println("Поток прерван" + e);
-                }
-            }
-        });
-        threadB.start();
+    public void second() throws InterruptedException {
+        cd1.await();
+        System.out.print("second");
+        cd2.countDown();
     }
 
-    public void third() {
-        Thread threadC = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    cd2.await();
-                    System.out.print("third");
-                    cd2.countDown();
-                } catch (InterruptedException e) {
-                    System.out.println("Поток прерван" + e);
-                }
-            }
-        });
-        threadC.start();
+    public void third() throws InterruptedException {
+        cd2.await();
+        System.out.print("third");
+        cd2.countDown();
     }
 }
